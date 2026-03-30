@@ -40,13 +40,9 @@ variable "cluster_version" {
 }
 
 variable "oidc_binding_id" {
-  description = "(Required) OIDC binding identifier used for component dependency ordering."
+  description = "(Optional) OIDC binding identifier used for component dependency ordering."
   type        = string
-
-  validation {
-    condition     = trimspace(var.oidc_binding_id) != ""
-    error_message = "The `oidc_binding_id` variable must not be empty."
-  }
+  default     = ""
 }
 
 variable "oidc_provider_arn" {

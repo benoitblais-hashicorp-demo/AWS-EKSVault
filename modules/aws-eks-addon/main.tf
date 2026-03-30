@@ -15,10 +15,10 @@ module "eks_blueprints_addons" {
   enable_argo_workflows = false
 
   # Keep stack-level dependency inputs consumed to preserve ordering semantics.
-  create_delay_dependencies = [
+  create_delay_dependencies = compact([
     var.oidc_binding_id,
     var.cluster_certificate_authority_data
-  ]
+  ])
 
   # EKS Add-ons
   eks_addons = {
