@@ -5,8 +5,6 @@
 *.tfstate
 *.tfstate.*
 
-# Lock files
-
 # Crash log files
 crash.log
 crash.*.log
