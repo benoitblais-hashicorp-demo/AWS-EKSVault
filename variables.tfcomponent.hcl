@@ -34,6 +34,36 @@ variable "csi_service_account_namespace" {
   default     = "kube-system"
 }
 
+variable "edr_helm_chart" {
+  description = "(Optional) Uptycs EDR Helm chart name for Kubernetes installation."
+  type        = string
+  default     = "k8sosquery"
+}
+
+variable "edr_helm_chart_version" {
+  description = "(Optional) Uptycs EDR Helm chart version. Leave empty to use the latest available chart."
+  type        = string
+  default     = ""
+}
+
+variable "edr_helm_repository" {
+  description = "(Optional) Uptycs EDR Helm repository URL for Kubernetes installation."
+  type        = string
+  default     = "https://helm.uptycs.io"
+}
+
+variable "edr_namespace" {
+  description = "(Optional) Namespace where Uptycs EDR components are deployed."
+  type        = string
+  default     = "uptycs"
+}
+
+variable "edr_uptycs_tags" {
+  description = "(Optional) Uptycs tags for Kubernetes EDR in UPDATE/CCODE/UT/OWNER format."
+  type        = string
+  default     = "UPDATE/PROD,CCODE/HashiCorp,UT/20A7V,OWNER/security-team@ibm.com"
+}
+
 variable "eks_clusteradmin_arn" {
   description = "(Optional) ARN of an existing IAM role or user to grant cluster admin access. Only used if create_clusteradmin_role is false. Leave empty to skip additional admin access."
   type        = string
@@ -154,6 +184,16 @@ variable "vpc_cidr" {
   description = "(Optional) CIDR block for the VPC network."
   type        = string
   default     = "10.0.0.0/16"
+}
+
+variable "wiz_scanner_cidrs" {
+  description = "(Optional) Wiz cloud scanner CIDRs allowed to reach the EKS public API endpoint."
+  type        = list(string)
+  default = [
+    "44.219.22.239/32",
+    "54.205.48.237/32",
+    "52.207.181.131/32"
+  ]
 }
 
 variable "vpc_name" {

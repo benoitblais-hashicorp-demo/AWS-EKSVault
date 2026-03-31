@@ -24,6 +24,7 @@ component "eks_vso" {
     vpc_id             = component.vpc[each.value].vpc_id
     private_subnets    = component.vpc[each.value].private_subnets
     kubernetes_version = var.kubernetes_version
+    wiz_scanner_cidrs  = var.wiz_scanner_cidrs
     cluster_name       = var.cluster_name_vso
     tfc_hostname       = var.tfc_hostname
     tfc_kubernetes_audience = var.tfc_kubernetes_audience
@@ -52,6 +53,7 @@ component "eks_vso_csi" {
     vpc_id               = component.vpc[each.value].vpc_id
     private_subnets      = component.vpc[each.value].private_subnets
     kubernetes_version   = var.kubernetes_version
+    wiz_scanner_cidrs    = var.wiz_scanner_cidrs
     cluster_name         = var.cluster_name_vso_csi
     tfc_hostname         = var.tfc_hostname
     tfc_kubernetes_audience = var.tfc_kubernetes_audience
@@ -152,6 +154,52 @@ component "k8s-addons-vso-csi" {
     helm       = provider.helm.vso_csi_oidc_configurations[each.value]
     aws        = provider.aws.configurations[each.value]
     time       = provider.time.this
+  }
+}
+
+# Uptycs EDR - VSO lane
+component "k8s-edr-vso" {
+  for_each = var.regions
+
+  source = "./modules/k8s-edr-uptycs"
+
+  inputs = {
+    cluster_name            = component.eks_vso[each.value].cluster_name
+    namespace               = var.edr_namespace
+    helm_repository         = var.edr_helm_repository
+    helm_chart              = var.edr_helm_chart
+    helm_chart_version      = var.edr_helm_chart_version
+    uptycs_tags             = var.edr_uptycs_tags
+    cluster_readiness_token = component.k8s-rbac-vso[each.value].oidc_binding_id
+    addons_dependency_token = tostring(length(keys(component.k8s-addons-vso[each.value].eks_addons)))
+  }
+
+  providers = {
+    kubernetes = provider.kubernetes.vso_oidc_configurations[each.value]
+    helm       = provider.helm.vso_oidc_configurations[each.value]
+  }
+}
+
+# Uptycs EDR - VSO with CSI lane
+component "k8s-edr-vso-csi" {
+  for_each = var.regions
+
+  source = "./modules/k8s-edr-uptycs"
+
+  inputs = {
+    cluster_name            = component.eks_vso_csi[each.value].cluster_name
+    namespace               = var.edr_namespace
+    helm_repository         = var.edr_helm_repository
+    helm_chart              = var.edr_helm_chart
+    helm_chart_version      = var.edr_helm_chart_version
+    uptycs_tags             = var.edr_uptycs_tags
+    cluster_readiness_token = component.k8s-rbac-vso-csi[each.value].oidc_binding_id
+    addons_dependency_token = tostring(length(keys(component.k8s-addons-vso-csi[each.value].eks_addons)))
+  }
+
+  providers = {
+    kubernetes = provider.kubernetes.vso_csi_oidc_configurations[each.value]
+    helm       = provider.helm.vso_csi_oidc_configurations[each.value]
   }
 }
 
