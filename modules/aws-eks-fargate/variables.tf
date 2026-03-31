@@ -38,6 +38,12 @@ variable "vpc_id" {
   }
 }
 
+variable "wiz_scanner_cidrs" {
+  description = "(Optional) Wiz scanner CIDRs allowed to reach the public EKS API endpoint."
+  type        = list(string)
+  default     = []
+}
+
 variable "cluster_name" {
   description = "(Optional) EKS cluster name."
   type        = string
