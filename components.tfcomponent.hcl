@@ -341,3 +341,26 @@ component "vault-config-vso-csi" {
     vault = provider.vault.this
   }
 }
+
+# Optional VSO static-secret demo webpage - VSO lane
+component "k8s-demo-app-vso" {
+  for_each = var.vault_address != "" ? var.regions : toset([])
+
+  source = "./modules/k8s-demo-app"
+
+  inputs = {
+    app_namespace          = component.vault-integration-vso[each.value].namespace
+    vault_address          = var.vault_address
+    vault_auth_path        = component.vault-config-vso[each.value].auth_path
+    vault_auth_role        = component.vault-config-vso[each.value].vso_role_name
+    vault_kv_mount_path    = var.vault_kv_mount_path
+    vault_secret_path_prefix = "${var.vault_secret_path_prefix}/${component.eks_vso[each.value].cluster_name}"
+    vso_service_account_name = var.vso_service_account_name
+  }
+
+  providers = {
+    kubernetes = provider.kubernetes.vso_oidc_configurations[each.value]
+    time       = provider.time.this
+    vault      = provider.vault.this
+  }
+}
