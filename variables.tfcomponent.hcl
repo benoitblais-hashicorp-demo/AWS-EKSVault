@@ -34,6 +34,36 @@ variable "csi_service_account_namespace" {
   default     = "kube-system"
 }
 
+variable "edr_helm_chart" {
+  description = "(Optional) Uptycs EDR Helm chart name for Kubernetes installation."
+  type        = string
+  default     = "k8sosquery"
+}
+
+variable "edr_helm_chart_version" {
+  description = "(Optional) Uptycs EDR Helm chart version. Leave empty to use the latest available chart."
+  type        = string
+  default     = ""
+}
+
+variable "edr_helm_repository" {
+  description = "(Optional) Uptycs EDR Helm repository URL for Kubernetes installation."
+  type        = string
+  default     = "https://helm.uptycs.io"
+}
+
+variable "edr_namespace" {
+  description = "(Optional) Namespace where Uptycs EDR components are deployed."
+  type        = string
+  default     = "uptycs"
+}
+
+variable "edr_uptycs_tags" {
+  description = "(Optional) Uptycs tags for Kubernetes EDR in UPDATE/CCODE/UT/OWNER format."
+  type        = string
+  default     = "UPDATE/PROD,CCODE/HashiCorp,UT/20A7V,OWNER/security-team@ibm.com"
+}
+
 variable "eks_clusteradmin_arn" {
   description = "(Optional) ARN of an existing IAM role or user to grant cluster admin access. Only used if create_clusteradmin_role is false. Leave empty to skip additional admin access."
   type        = string
