@@ -20,7 +20,19 @@ resource "vault_kv_secret_v2" "webapp" {
   }
 }
 
+resource "time_sleep" "wait_for_vso_crd_registration" {
+  # VSO CRDs can take extra time to be discoverable by the API server after Helm install.
+  create_duration = "45s"
+
+  triggers = {
+    integration_dependency_token = var.integration_dependency_token
+    app_namespace                = var.app_namespace
+  }
+}
+
 resource "kubernetes_manifest" "vault_connection" {
+  depends_on = [time_sleep.wait_for_vso_crd_registration]
+
   manifest = {
     apiVersion = "secrets.hashicorp.com/v1beta1"
     kind       = "VaultConnection"
