@@ -119,6 +119,12 @@ variable "regions" {
   default     = ["ca-central-1"]
 }
 
+variable "role_arn" {
+  description = "(Optional) ARN of the IAM role to assume for AWS operations."
+  type        = string
+  default     = "arn:aws:iam::353671346900:role/tfc-benoitblais-hashicorp"
+}
+
 variable "tfc_hostname" {
   description = "(Optional) Hostname of the Terraform Cloud or Terraform Enterprise instance."
   type        = string
@@ -198,20 +204,15 @@ variable "vso_service_account_name" {
   default     = "vault-secrets-operator-controller-manager"
 }
 
-variable "k8s_identity_token" {
-  description = "(Not Required) Ephemeral Kubernetes identity token managed by the stack deployment identity_token wiring."
+variable "aws_identity_token" {
+  description = "(Not Required) Ephemeral AWS identity token managed by the stack deployment identity_token wiring."
   type        = string
   ephemeral   = true
   sensitive   = true
 }
 
-variable "role_arn" {
-  description = "(Required) ARN of the IAM role to assume for AWS operations"
-  type        = string
-}
-
-variable "aws_identity_token" {
-  description = "(Required) Ephemeral AWS identity token for authentication with AWS services."
+variable "k8s_identity_token" {
+  description = "(Not Required) Ephemeral Kubernetes identity token managed by the stack deployment identity_token wiring."
   type        = string
   ephemeral   = true
   sensitive   = true
