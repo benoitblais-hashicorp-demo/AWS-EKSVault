@@ -33,3 +33,4 @@ In `deployments.tfdeploy.hcl`, set:
 - `install_vso_csi = true` to bootstrap VSO+CSI lane
 
 If `vault_address` is empty, Vault bootstrap components are skipped.
+
