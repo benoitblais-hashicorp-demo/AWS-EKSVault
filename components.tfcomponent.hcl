@@ -350,6 +350,7 @@ component "k8s-demo-app-vso" {
 
   inputs = {
     app_namespace          = component.vault-integration-vso[each.value].namespace
+    integration_dependency_token = component.vault-integration-vso[each.value].vso_release_revision
     demo_app_image         = var.demo_webapp_image
     vault_address          = var.vault_address
     vault_auth_path        = component.vault-config-vso[each.value].auth_path
@@ -374,6 +375,7 @@ component "k8s-demo-app-vso-csi" {
 
   inputs = {
     app_namespace            = component.vault-integration-vso-csi[each.value].namespace
+    integration_dependency_token = component.vault-integration-vso-csi[each.value].vso_release_revision
     demo_app_image           = var.demo_webapp_image
     vault_address            = var.vault_address
     vault_auth_path          = component.vault-config-vso-csi[each.value].auth_path
