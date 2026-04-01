@@ -9,6 +9,11 @@ terraform {
       version = "~> 2.25"
     }
 
+    vault = {
+      source  = "hashicorp/vault"
+      version = "5.8.0"
+    }
+
     time = {
       source  = "hashicorp/time"
       version = "~> 0.1"
