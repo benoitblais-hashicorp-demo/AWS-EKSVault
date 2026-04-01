@@ -29,6 +29,11 @@ required_providers {
     version = "~> 2.12"
   }
 
+  kubectl = {
+    source  = "gavinbunney/kubectl"
+    version = "~> 1.19"
+  }
+
   local = {
     source = "hashicorp/local"
     version = "~> 2.4"
@@ -119,6 +124,28 @@ provider "helm" "vso_csi_oidc_configurations" {
       cluster_ca_certificate = base64decode(component.eks_vso_csi[each.value].cluster_certificate_authority_data)
       token                  = var.k8s_identity_token
     }
+  }
+}
+
+provider "kubectl" "vso_oidc_configurations" {
+  for_each = var.regions
+
+  config {
+    load_config_file       = false
+    host                   = component.eks_vso[each.value].cluster_endpoint
+    cluster_ca_certificate = base64decode(component.eks_vso[each.value].cluster_certificate_authority_data)
+    token                  = var.k8s_identity_token
+  }
+}
+
+provider "kubectl" "vso_csi_oidc_configurations" {
+  for_each = var.regions
+
+  config {
+    load_config_file       = false
+    host                   = component.eks_vso_csi[each.value].cluster_endpoint
+    cluster_ca_certificate = base64decode(component.eks_vso_csi[each.value].cluster_certificate_authority_data)
+    token                  = var.k8s_identity_token
   }
 }
 

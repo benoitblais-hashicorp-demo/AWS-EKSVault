@@ -30,10 +30,10 @@ resource "time_sleep" "wait_for_vso_crd_registration" {
   }
 }
 
-resource "kubernetes_manifest" "vault_connection" {
+resource "kubectl_manifest" "vault_connection" {
   depends_on = [time_sleep.wait_for_vso_crd_registration]
 
-  manifest = {
+  yaml_body = yamlencode({
     apiVersion = "secrets.hashicorp.com/v1beta1"
     kind       = "VaultConnection"
     metadata = {
@@ -43,13 +43,13 @@ resource "kubernetes_manifest" "vault_connection" {
     spec = {
       address = var.vault_address
     }
-  }
+  })
 }
 
-resource "kubernetes_manifest" "vault_auth" {
-  depends_on = [kubernetes_manifest.vault_connection]
+resource "kubectl_manifest" "vault_auth" {
+  depends_on = [kubectl_manifest.vault_connection]
 
-  manifest = {
+  yaml_body = yamlencode({
     apiVersion = "secrets.hashicorp.com/v1beta1"
     kind       = "VaultAuth"
     metadata = {
@@ -66,16 +66,16 @@ resource "kubernetes_manifest" "vault_auth" {
         audiences      = ["vault"]
       }
     }
-  }
+  })
 }
 
-resource "kubernetes_manifest" "vault_static_secret" {
+resource "kubectl_manifest" "vault_static_secret" {
   depends_on = [
-    kubernetes_manifest.vault_auth,
+    kubectl_manifest.vault_auth,
     vault_kv_secret_v2.webapp,
   ]
 
-  manifest = {
+  yaml_body = yamlencode({
     apiVersion = "secrets.hashicorp.com/v1beta1"
     kind       = "VaultStaticSecret"
     metadata = {
@@ -99,11 +99,11 @@ resource "kubernetes_manifest" "vault_static_secret" {
         }
       ]
     }
-  }
+  })
 }
 
 resource "kubernetes_deployment" "static_app" {
-  depends_on = [kubernetes_manifest.vault_static_secret]
+  depends_on = [kubectl_manifest.vault_static_secret]
 
   metadata {
     name      = local.static_app_name
