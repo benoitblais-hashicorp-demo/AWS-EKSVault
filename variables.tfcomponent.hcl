@@ -35,9 +35,9 @@ variable "csi_service_account_namespace" {
 }
 
 variable "demo_webapp_image" {
-  description = "(Optional) Container image used by the VSO static-secret demo web application. Leave empty to skip provisioning the demo pod."
+  description = "(Optional) Container image used by the VSO static-secret demo web application. Set to an empty string to skip provisioning the demo pod."
   type        = string
-  default     = ""
+  default     = "ghcr.io/benoitblais-hashicorp-demo/demo-go-web:v1.1.0"
 }
 
 variable "edr_helm_chart" {
@@ -98,7 +98,7 @@ variable "kubernetes_version" {
 variable "namespace" {
   description = "(Optional) Kubernetes namespace for application deployment."
   type        = string
-  default     = "hashibank"
+  default     = "app"
 }
 
 variable "namespace_vso" {
@@ -146,7 +146,7 @@ variable "tfc_organization_name" {
 variable "vault_address" {
   description = "(Optional) Vault address. When set, downstream components can enable Vault integrations."
   type        = string
-  default     = ""
+  default     = "https://vault-cluster-public-vault-642ba184.ade9d519.z1.hashicorp.cloud:8200"
 }
 
 variable "vault_kubernetes_auth_path_vso" {
@@ -177,20 +177,13 @@ variable "vault_kv_mount_path" {
 variable "vault_namespace" {
   description = "(Optional) Vault namespace where Kubernetes auth and policies are configured."
   type        = string
-  default     = "admin"
+  default     = "admin/kubernetes-demo"
 }
 
 variable "vault_secret_path_prefix" {
   description = "(Optional) Secret path prefix under the KVv2 mount for demo reads."
   type        = string
   default     = "demo"
-}
-
-variable "vault_token" {
-  description = "(Optional) Vault token. Leave empty to use dynamic credentials or environment-based authentication."
-  type        = string
-  default     = ""
-  sensitive   = true
 }
 
 variable "vpc_cidr" {
