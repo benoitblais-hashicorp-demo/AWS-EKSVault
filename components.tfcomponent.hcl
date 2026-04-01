@@ -365,3 +365,27 @@ component "k8s-demo-app-vso" {
     vault      = provider.vault.this
   }
 }
+
+# Optional VSO static-secret demo webpage - VSO with CSI lane
+component "k8s-demo-app-vso-csi" {
+  for_each = var.vault_address != "" && var.demo_webapp_image != "" ? var.regions : toset([])
+
+  source = "./modules/k8s-demo-app"
+
+  inputs = {
+    app_namespace            = component.vault-integration-vso-csi[each.value].namespace
+    demo_app_image           = var.demo_webapp_image
+    vault_address            = var.vault_address
+    vault_auth_path          = component.vault-config-vso-csi[each.value].auth_path
+    vault_auth_role          = component.vault-config-vso-csi[each.value].vso_role_name
+    vault_kv_mount_path      = var.vault_kv_mount_path
+    vault_secret_path_prefix = "${var.vault_secret_path_prefix}/${component.eks_vso_csi[each.value].cluster_name}"
+    vso_service_account_name = var.vso_service_account_name
+  }
+
+  providers = {
+    kubernetes = provider.kubernetes.vso_csi_oidc_configurations[each.value]
+    time       = provider.time.this
+    vault      = provider.vault.this
+  }
+}
