@@ -35,10 +35,9 @@ resource "helm_release" "vault_secrets_operator" {
   wait             = true
   timeout          = 600
 
-  set {
-    name  = "installCRDs"
-    value = "true"
-  }
+  values = [yamlencode({
+    installCRDs = true
+  })]
 }
 
 resource "helm_release" "secrets_store_csi_driver" {
