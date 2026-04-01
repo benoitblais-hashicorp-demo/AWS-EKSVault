@@ -146,7 +146,7 @@ variable "tfc_organization_name" {
 variable "vault_address" {
   description = "(Optional) Vault address. When set, downstream components can enable Vault integrations."
   type        = string
-  default     = ""
+  default     = "https://vault-cluster-public-vault-642ba184.ade9d519.z1.hashicorp.cloud:8200"
 }
 
 variable "vault_kubernetes_auth_path_vso" {
@@ -177,7 +177,7 @@ variable "vault_kv_mount_path" {
 variable "vault_namespace" {
   description = "(Optional) Vault namespace where Kubernetes auth and policies are configured."
   type        = string
-  default     = "admin"
+  default     = "admin/kubernetes-demo"
 }
 
 variable "vault_secret_path_prefix" {
