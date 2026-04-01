@@ -361,6 +361,7 @@ component "k8s-demo-app-vso" {
   }
 
   providers = {
+    helm       = provider.helm.vso_oidc_configurations[each.value]
     kubernetes = provider.kubernetes.vso_oidc_configurations[each.value]
     time       = provider.time.this
     vault      = provider.vault.this
@@ -386,6 +387,7 @@ component "k8s-demo-app-vso-csi" {
   }
 
   providers = {
+    helm       = provider.helm.vso_csi_oidc_configurations[each.value]
     kubernetes = provider.kubernetes.vso_csi_oidc_configurations[each.value]
     time       = provider.time.this
     vault      = provider.vault.this
