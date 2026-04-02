@@ -136,8 +136,9 @@ provider "random" "this" {}
 
 provider "vault" "this" {
   config {
-    address   = var.vault_address
-    namespace = var.vault_namespace
+    address          = var.vault_address
+    namespace        = var.vault_namespace
+    skip_child_token = true
     
     auth_login_jwt {
       mount = var.vault_provider_auth_path
