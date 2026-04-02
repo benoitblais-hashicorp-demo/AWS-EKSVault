@@ -476,4 +476,3 @@ Before submitting your action implementation:
 - [Terraform Provider Development](https://developer.hashicorp.com/terraform/plugin)
 - [terraform-plugin-framework GitHub](https://github.com/hashicorp/terraform-plugin-framework)
 - [terraform-plugin-testing](https://github.com/hashicorp/terraform-plugin-testing)
-
