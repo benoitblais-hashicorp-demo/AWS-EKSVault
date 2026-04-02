@@ -13,18 +13,18 @@ This guide covers the mandatory requirements for Azure Verified Modules certific
 
 ## Table of Contents
 
-- [Module Cross-Referencing](#module-cross-referencing)
-- [Azure Provider Requirements](#azure-provider-requirements)
-- [Code Style Standards](#code-style-standards)
-- [Variable Requirements](#variable-requirements)
-- [Output Requirements](#output-requirements)
-- [Local Values Standards](#local-values-standards)
-- [Terraform Configuration Requirements](#terraform-configuration-requirements)
-- [Testing Requirements](#testing-requirements)
-- [Documentation Requirements](#documentation-requirements)
-- [Breaking Changes & Feature Management](#breaking-changes--feature-management)
-- [Contribution Standards](#contribution-standards)
-- [Compliance Checklist](#compliance-checklist)
+- Module Cross-Referencing
+- Azure Provider Requirements
+- Code Style Standards
+- Variable Requirements
+- Output Requirements
+- Local Values Standards
+- Terraform Configuration Requirements
+- Testing Requirements
+- Documentation Requirements
+- Breaking Changes & Feature Management
+- Contribution Standards
+- Compliance Checklist
 
 ---
 

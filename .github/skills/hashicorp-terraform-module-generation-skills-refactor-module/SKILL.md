@@ -371,7 +371,7 @@ module "vpc" {
 
 ## Examples
 
-See [examples/](./examples/) directory for complete usage examples.
+See examples directory for complete usage examples.
 ```
 
 ### 6. Testing
