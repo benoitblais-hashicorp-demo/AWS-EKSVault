@@ -1,5 +1,5 @@
 ---
-name: azure-verified-modules
+name: hashicorp-terraform-code-generation-skills-azure-verified-modules
 description: Azure Verified Modules (AVM) requirements and best practices for developing certified Azure Terraform modules. Use when creating or reviewing Azure modules that need AVM certification.
 ---
 

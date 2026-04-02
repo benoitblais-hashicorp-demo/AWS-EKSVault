@@ -1,5 +1,5 @@
 ---
-name: push-to-registry
+name: hashicorp-packer-hcp-skills-push-to-registry
 description: Push Packer build metadata to HCP Packer registry for tracking and managing image lifecycle. Use when integrating Packer builds with HCP Packer for version control and governance.
 ---
 
@@ -125,7 +125,7 @@ build_labels = {
 ### GitHub Actions
 
 ```yaml
-name: Build and Push to HCP Packer
+name: hashicorp-packer-hcp-skills-push-to-registry
 
 on:
   push:
