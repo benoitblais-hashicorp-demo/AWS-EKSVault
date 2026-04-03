@@ -44,21 +44,21 @@ module "vpc" {
 
 The following requirements are needed by this module:
 
-- [terraform](#requirement\_terraform) (>= 1.0.0)
+- terraform (>= 1.0.0)
 
-- [aws](#requirement\_aws) (~> 5.0)
+- aws (~> 5.0)
 
 ## Providers
 
 The following providers are used by this module:
 
-- [aws](#provider\_aws) (~> 5.0)
+- aws (~> 5.0)
 
 ## Modules
 
 The following Modules are called:
 
-### [vpc](#module\_vpc)
+### vpc
 
 Source: terraform-aws-modules/vpc/aws
 
@@ -74,13 +74,13 @@ The following resources are used by this module:
 
 The following input variables are required:
 
-### [vpc\_cidr](#input\_vpc\_cidr)
+### vpc\_cidr
 
 Description: (Required) CIDR block for the VPC.
 
 Type: `string`
 
-### [vpc\_name](#input\_vpc\_name)
+### vpc\_name
 
 Description: (Required) Name of the VPC.
 
@@ -94,14 +94,14 @@ No optional inputs.
 
 The following outputs are exported:
 
-### [private\_subnets](#output\_private\_subnets)
+### private\_subnets
 
 Description: List of private subnet identifiers created in the VPC.
 
-### [route\_table\_id](#output\_route\_table\_id)
+### route\_table\_id
 
 Description: List of private route table identifiers created in the VPC.
 
-### [vpc\_id](#output\_vpc\_id)
+### vpc\_id
 
 Description: Identifier of the VPC.
