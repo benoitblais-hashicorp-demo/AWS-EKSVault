@@ -25,12 +25,12 @@ This module uses Kubernetes and Helm provider authentication configured by the c
 
 ```hcl
 module "k8s_edr_uptycs" {
-	source = "./modules/k8s-edr-uptycs"
+  source = "./modules/k8s-edr-uptycs"
 
-	addons_dependency_token = "addons-ready"
-	cluster_name            = "eks-ca-vso"
-	cluster_readiness_token = "rbac-ready"
-	uptycs_tags             = "UPDATE/PROD,CCODE/HashiCorp,UT/20A7V,OWNER/security-team@ibm.com"
+  addons_dependency_token = "addons-ready"
+  cluster_name            = "eks-ca-vso"
+  cluster_readiness_token = "rbac-ready"
+  uptycs_tags             = "UPDATE/PROD,CCODE/HashiCorp,UT/20A7V,OWNER/security-team@ibm.com"
 }
 ```
 
