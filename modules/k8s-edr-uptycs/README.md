@@ -40,19 +40,19 @@ module "k8s_edr_uptycs" {
 
 The following requirements are needed by this module:
 
-- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>= 1.0.0)
+- terraform
 
-- <a name="requirement_helm"></a> [helm](#requirement\_helm) (~> 2.12)
+- helm
 
-- <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) (~> 2.25)
+- kubernetes
 
 ## Providers
 
 The following providers are used by this module:
 
-- <a name="provider_helm"></a> [helm](#provider\_helm) (~> 2.12)
+- helm
 
-- <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) (~> 2.25)
+- kubernetes
 
 ## Modules
 
@@ -69,25 +69,25 @@ The following resources are used by this module:
 
 The following input variables are required:
 
-### <a name="input_addons_dependency_token"></a> [addons\_dependency\_token](#input\_addons\_dependency\_token)
+### addons\_dependency\_token
 
 Description: (Required) Dependency token to ensure this component runs after EKS add-ons.
 
 Type: `string`
 
-### <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name)
+### cluster\_name
 
 Description: (Required) EKS cluster name used for metadata labeling.
 
 Type: `string`
 
-### <a name="input_cluster_readiness_token"></a> [cluster\_readiness\_token](#input\_cluster\_readiness\_token)
+### cluster\_readiness\_token
 
 Description: (Required) Dependency token to ensure this component runs after cluster RBAC readiness.
 
 Type: `string`
 
-### <a name="input_uptycs_tags"></a> [uptycs\_tags](#input\_uptycs\_tags)
+### uptycs\_tags
 
 Description: (Required) Comma-separated Uptycs tags in UPDATE/CCODE/UT/OWNER format.
 
@@ -97,7 +97,7 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
-### <a name="input_additional_values_yaml"></a> [additional\_values\_yaml](#input\_additional\_values\_yaml)
+### additional\_values\_yaml
 
 Description: (Optional) Additional Helm values YAML documents merged after default tag configuration.
 
@@ -105,7 +105,7 @@ Type: `list(string)`
 
 Default: `[]`
 
-### <a name="input_helm_chart"></a> [helm\_chart](#input\_helm\_chart)
+### helm\_chart
 
 Description: (Optional) Uptycs Helm chart name.
 
@@ -113,7 +113,7 @@ Type: `string`
 
 Default: `"k8sosquery"`
 
-### <a name="input_helm_chart_version"></a> [helm\_chart\_version](#input\_helm\_chart\_version)
+### helm\_chart\_version
 
 Description: (Optional) Uptycs Helm chart version. Leave empty to install the latest available chart.
 
@@ -121,7 +121,7 @@ Type: `string`
 
 Default: `""`
 
-### <a name="input_helm_repository"></a> [helm\_repository](#input\_helm\_repository)
+### helm\_repository
 
 Description: (Optional) Uptycs Helm repository URL.
 
@@ -129,7 +129,7 @@ Type: `string`
 
 Default: `"https://uptycslabs.github.io/kspm-helm-charts"`
 
-### <a name="input_namespace"></a> [namespace](#input\_namespace)
+### namespace
 
 Description: (Optional) Namespace where Uptycs EDR components are installed.
 
@@ -141,10 +141,10 @@ Default: `"uptycs"`
 
 The following outputs are exported:
 
-### <a name="output_edr_helm_release"></a> [edr\_helm\_release](#output\_edr\_helm\_release)
+### edr\_helm\_release
 
 Description: Name of the Uptycs EDR Helm release.
 
-### <a name="output_edr_namespace"></a> [edr\_namespace](#output\_edr\_namespace)
+### edr\_namespace
 
 Description: Namespace where Uptycs EDR is installed.

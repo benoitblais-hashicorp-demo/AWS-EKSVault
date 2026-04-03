@@ -158,51 +158,53 @@ component "k8s-addons-vso-csi" {
 
 }
 
-# # Uptycs EDR - VSO lane
-# component "k8s-edr-vso" {
+# Uptycs EDR - VSO lane
+component "k8s-edr-vso" {
 
-#   source = "./modules/k8s-edr-uptycs"
+  source = "./modules/k8s-edr-uptycs"
 
-#   inputs = {
-#     cluster_name            = component.eks_vso.cluster_name
-#     namespace               = var.edr_namespace
-#     helm_repository         = var.edr_helm_repository
-#     helm_chart              = var.edr_helm_chart
-#     helm_chart_version      = var.edr_helm_chart_version
-#     additional_values_yaml  = var.edr_k8sosquery_values_yaml != "" ? [var.edr_k8sosquery_values_yaml] : []
-#     uptycs_tags             = var.edr_uptycs_tags
-#     cluster_readiness_token = component.k8s-rbac-vso.oidc_binding_id
-#     addons_dependency_token = tostring(length(keys(component.k8s-addons-vso.eks_addons)))
-#   }
+  inputs = {
+    cluster_name            = component.eks_vso.cluster_name
+    namespace               = var.edr_namespace
+    helm_repository         = var.edr_helm_repository
+    helm_chart              = var.edr_helm_chart
+    helm_chart_version      = var.edr_helm_chart_version
+    additional_values_yaml  = var.edr_k8sosquery_values_yaml != "" ? [var.edr_k8sosquery_values_yaml] : []
+    uptycs_tags             = var.edr_uptycs_tags
+    cluster_readiness_token = component.k8s-rbac-vso.oidc_binding_id
+    addons_dependency_token = tostring(length(keys(component.k8s-addons-vso.eks_addons)))
+  }
 
-#   providers = {
-#     kubernetes = provider.kubernetes.vso_oidc_configurations
-#     helm       = provider.helm.vso_oidc_configurations
-#   }
-# }
+  providers = {
+    kubernetes = provider.kubernetes.vso_oidc_configurations
+    helm       = provider.helm.vso_oidc_configurations
+  }
 
-# # Uptycs EDR - VSO with CSI lane
-# component "k8s-edr-vso-csi" {
+}
 
-#   source = "./modules/k8s-edr-uptycs"
+# Uptycs EDR - VSO with CSI lane
+component "k8s-edr-vso-csi" {
 
-#   inputs = {
-#     cluster_name            = component.eks_vso_csi.cluster_name
-#     namespace               = var.edr_namespace
-#     helm_repository         = var.edr_helm_repository
-#     helm_chart              = var.edr_helm_chart
-#     helm_chart_version      = var.edr_helm_chart_version
-#     additional_values_yaml  = var.edr_k8sosquery_values_yaml != "" ? [var.edr_k8sosquery_values_yaml] : []
-#     uptycs_tags             = var.edr_uptycs_tags
-#     cluster_readiness_token = component.k8s-rbac-vso-csi.oidc_binding_id
-#     addons_dependency_token = tostring(length(keys(component.k8s-addons-vso-csi.eks_addons)))
-#   }
+  source = "./modules/k8s-edr-uptycs"
 
-#   providers = {
-#     kubernetes = provider.kubernetes.vso_csi_oidc_configurations
-#     helm       = provider.helm.vso_csi_oidc_configurations
-#   }
-# }
+  inputs = {
+    cluster_name            = component.eks_vso_csi.cluster_name
+    namespace               = var.edr_namespace
+    helm_repository         = var.edr_helm_repository
+    helm_chart              = var.edr_helm_chart
+    helm_chart_version      = var.edr_helm_chart_version
+    additional_values_yaml  = var.edr_k8sosquery_values_yaml != "" ? [var.edr_k8sosquery_values_yaml] : []
+    uptycs_tags             = var.edr_uptycs_tags
+    cluster_readiness_token = component.k8s-rbac-vso-csi.oidc_binding_id
+    addons_dependency_token = tostring(length(keys(component.k8s-addons-vso-csi.eks_addons)))
+  }
+
+  providers = {
+    kubernetes = provider.kubernetes.vso_csi_oidc_configurations
+    helm       = provider.helm.vso_csi_oidc_configurations
+  }
+
+}
 
 # # Namespace - VSO lane
 # component "k8s-namespace-vso" {
