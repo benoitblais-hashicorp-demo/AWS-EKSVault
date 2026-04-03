@@ -37,3 +37,9 @@ variable "vault_address" {
     error_message = "The `vault_address` variable must be a valid HTTP or HTTPS URL."
   }
 }
+
+variable "cluster_readiness_token" {
+  description = "(Optional) A dummy token used to explicitly order component execution (e.g. forcing wait for RBAC)."
+  type        = string
+  default     = ""
+}
