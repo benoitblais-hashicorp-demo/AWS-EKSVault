@@ -36,6 +36,7 @@ component "eks_vso" {
     aws        = provider.aws.configurations
     cloudinit  = provider.cloudinit.this
     kubernetes = provider.kubernetes.this
+    null       = provider.null.this
     time       = provider.time.this
     tls        = provider.tls.this
   }
@@ -64,6 +65,7 @@ component "eks_vso_csi" {
     aws        = provider.aws.configurations
     cloudinit  = provider.cloudinit.this
     kubernetes = provider.kubernetes.this
+    null       = provider.null.this
     time       = provider.time.this
     tls        = provider.tls.this
   }

@@ -34,6 +34,11 @@ required_providers {
     version = "~> 2.4"
   }
 
+  null = {
+    source  = "hashicorp/null"
+    version = "~> 3.2"
+  }
+
   random = {
     source = "hashicorp/random"
     version = "~> 3.7.0"
@@ -119,6 +124,8 @@ provider "time" "this" {}
 provider "tls" "this" {}
 
 provider "local" "this" {}
+
+provider "null" "this" {}
 
 provider "random" "this" {}
 
