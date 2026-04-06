@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD024 -->
 # Kubernetes Namespace Terraform module
 
 This module creates a Kubernetes namespace and applies metadata labels.
