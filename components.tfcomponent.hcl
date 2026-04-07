@@ -300,55 +300,57 @@ component "vault-kv-mount" {
 
 }
 
-# # Optional Vault auth and policy configuration - VSO lane
-# component "vault-config-vso" {
-#   for_each = var.vault_address != "" ? toset(["enabled"]) : toset([])
+# Optional Vault auth and policy configuration - VSO lane
+component "vault-config-vso" {
+  for_each = var.vault_address != "" ? toset(["enabled"]) : toset([])
 
-#   source = "./modules/vault-kubernetes-auth"
+  source = "./modules/vault-kubernetes-auth"
 
-#   inputs = {
-#     cluster_name                       = component.eks_vso.cluster_name
-#     cluster_endpoint                   = component.eks_vso.cluster_endpoint
-#     cluster_certificate_authority_data = component.eks_vso.cluster_certificate_authority_data
-#     token_reviewer_jwt                 = var.vault_kubernetes_token_reviewer_jwt != "" ? var.vault_kubernetes_token_reviewer_jwt : component.eks_vso.eks_token
-#     auth_path                          = "${var.vault_kubernetes_auth_path_vso}-${each.value}"
-#     kv_mount_path                      = var.vault_kv_mount_path
-#     secret_path_prefix                 = "${var.vault_secret_path_prefix}/${component.eks_vso.cluster_name}"
-#     vso_namespace                      = var.namespace_vso
-#     vso_service_account_name           = var.vso_service_account_name
-#     enable_csi_role                    = false
-#   }
+  inputs = {
+    cluster_name                       = component.eks_vso.cluster_name
+    cluster_endpoint                   = component.eks_vso.cluster_endpoint
+    cluster_certificate_authority_data = component.eks_vso.cluster_certificate_authority_data
+    token_reviewer_jwt                 = var.vault_kubernetes_token_reviewer_jwt != "" ? var.vault_kubernetes_token_reviewer_jwt : component.eks_vso.eks_token
+    auth_path                          = "${var.vault_kubernetes_auth_path_vso}-${each.value}"
+    kv_mount_path                      = var.vault_kv_mount_path
+    secret_path_prefix                 = "${var.vault_secret_path_prefix}/${component.eks_vso.cluster_name}"
+    vso_namespace                      = var.namespace_vso
+    vso_service_account_name           = var.vso_service_account_name
+    enable_csi_role                    = false
+  }
 
-#   providers = {
-#     vault = provider.vault.this
-#   }
-# }
+  providers = {
+    vault = provider.vault.this
+  }
 
-# # Optional Vault auth and policy configuration - VSO with CSI lane
-# component "vault-config-vso-csi" {
-#   for_each = var.vault_address != "" ? toset(["enabled"]) : toset([])
+}
 
-#   source = "./modules/vault-kubernetes-auth"
+# Optional Vault auth and policy configuration - VSO with CSI lane
+component "vault-config-vso-csi" {
+  for_each = var.vault_address != "" ? toset(["enabled"]) : toset([])
 
-#   inputs = {
-#     cluster_name                       = component.eks_vso_csi.cluster_name
-#     cluster_endpoint                   = component.eks_vso_csi.cluster_endpoint
-#     cluster_certificate_authority_data = component.eks_vso_csi.cluster_certificate_authority_data
-#     token_reviewer_jwt                 = var.vault_kubernetes_token_reviewer_jwt != "" ? var.vault_kubernetes_token_reviewer_jwt : component.eks_vso_csi.eks_token
-#     auth_path                          = "${var.vault_kubernetes_auth_path_vso_csi}-${each.value}"
-#     kv_mount_path                      = var.vault_kv_mount_path
-#     secret_path_prefix                 = "${var.vault_secret_path_prefix}/${component.eks_vso_csi.cluster_name}"
-#     vso_namespace                      = var.namespace_vso_csi
-#     vso_service_account_name           = var.vso_service_account_name
-#     enable_csi_role                    = true
-#     csi_service_account_name           = var.csi_service_account_name
-#     csi_service_account_namespace      = var.csi_service_account_namespace
-#   }
+  source = "./modules/vault-kubernetes-auth"
 
-#   providers = {
-#     vault = provider.vault.this
-#   }
-# }
+  inputs = {
+    cluster_name                       = component.eks_vso_csi.cluster_name
+    cluster_endpoint                   = component.eks_vso_csi.cluster_endpoint
+    cluster_certificate_authority_data = component.eks_vso_csi.cluster_certificate_authority_data
+    token_reviewer_jwt                 = var.vault_kubernetes_token_reviewer_jwt != "" ? var.vault_kubernetes_token_reviewer_jwt : component.eks_vso_csi.eks_token
+    auth_path                          = "${var.vault_kubernetes_auth_path_vso_csi}-${each.value}"
+    kv_mount_path                      = var.vault_kv_mount_path
+    secret_path_prefix                 = "${var.vault_secret_path_prefix}/${component.eks_vso_csi.cluster_name}"
+    vso_namespace                      = var.namespace_vso_csi
+    vso_service_account_name           = var.vso_service_account_name
+    enable_csi_role                    = true
+    csi_service_account_name           = var.csi_service_account_name
+    csi_service_account_namespace      = var.csi_service_account_namespace
+  }
+
+  providers = {
+    vault = provider.vault.this
+  }
+
+}
 
 # # App Namespace - VSO lane
 # component "k8s-namespace-app-vso" {
