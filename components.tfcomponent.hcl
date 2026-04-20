@@ -398,14 +398,14 @@ component "k8s-demo-app-vso" {
 
   inputs = {
     app_namespace                = component.k8s-namespace-app-vso.namespace
-    integration_dependency_token = component.vault-integration-vso.vso_release_revision
-    demo_app_image         = var.demo_webapp_image
-    vault_address          = var.vault_address
-    vault_auth_path        = component.vault-config-vso.auth_path
-    vault_auth_role        = component.vault-config-vso.vso_role_name
-    vault_kv_mount_path    = var.vault_kv_mount_path
-    vault_secret_path_prefix = "${var.vault_secret_path_prefix}/${component.eks_vso.cluster_name}"
-    vso_service_account_name = var.vso_service_account_name
+    integration_dependency_token = component.vault-integration-vso[each.key].vso_release_revision
+    demo_app_image               = var.demo_webapp_image
+    vault_address                = var.vault_address
+    vault_auth_path              = component.vault-config-vso[each.key].auth_path
+    vault_auth_role              = component.vault-config-vso[each.key].vso_role_name
+    vault_kv_mount_path          = var.vault_kv_mount_path
+    vault_secret_path_prefix     = "${var.vault_secret_path_prefix}/${component.eks_vso.cluster_name}"
+    vso_service_account_name     = var.vso_service_account_name
   }
 
   providers = {
@@ -414,6 +414,7 @@ component "k8s-demo-app-vso" {
     time       = provider.time.this
     vault      = provider.vault.this
   }
+
 }
 
 # Optional VSO static-secret demo webpage - VSO with CSI lane
@@ -423,15 +424,15 @@ component "k8s-demo-app-vso-csi" {
   source = "./modules/k8s-demo-app"
 
   inputs = {
-    app_namespace = component.k8s-namespace-app-vso-csi.namespace
-    integration_dependency_token = component.vault-integration-vso-csi.vso_release_revision
-    demo_app_image           = var.demo_webapp_image
-    vault_address            = var.vault_address
-    vault_auth_path          = component.vault-config-vso-csi.auth_path
-    vault_auth_role          = component.vault-config-vso-csi.vso_role_name
-    vault_kv_mount_path      = var.vault_kv_mount_path
-    vault_secret_path_prefix = "${var.vault_secret_path_prefix}/${component.eks_vso_csi.cluster_name}"
-    vso_service_account_name = var.vso_service_account_name
+    app_namespace                = component.k8s-namespace-app-vso-csi.namespace
+    integration_dependency_token = component.vault-integration-vso-csi[each.key].vso_release_revision
+    demo_app_image               = var.demo_webapp_image
+    vault_address                = var.vault_address
+    vault_auth_path              = component.vault-config-vso-csi[each.key].auth_path
+    vault_auth_role              = component.vault-config-vso-csi[each.key].vso_role_name
+    vault_kv_mount_path          = var.vault_kv_mount_path
+    vault_secret_path_prefix     = "${var.vault_secret_path_prefix}/${component.eks_vso_csi.cluster_name}"
+    vso_service_account_name     = var.vso_service_account_name
   }
 
   providers = {
@@ -440,4 +441,5 @@ component "k8s-demo-app-vso-csi" {
     time       = provider.time.this
     vault      = provider.vault.this
   }
+  
 }
