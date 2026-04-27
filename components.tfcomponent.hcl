@@ -250,6 +250,8 @@ component "vault-integration-vso" {
 
   inputs = {
     cluster_name            = component.eks_vso.cluster_name
+    cluster_endpoint        = component.eks_vso.cluster_endpoint
+    cluster_token           = var.k8s_identity_token
     integration_mode        = "vso"
     namespace               = component.k8s-namespace-vso.namespace
     vault_address           = var.vault_address
@@ -271,6 +273,8 @@ component "vault-integration-vso-csi" {
 
   inputs = {
     cluster_name            = component.eks_vso_csi.cluster_name
+    cluster_endpoint        = component.eks_vso_csi.cluster_endpoint
+    cluster_token           = var.k8s_identity_token
     integration_mode        = "vso_csi"
     namespace               = component.k8s-namespace-vso-csi.namespace
     vault_address           = var.vault_address

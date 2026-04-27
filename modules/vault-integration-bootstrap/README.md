@@ -1,4 +1,5 @@
 <!-- markdownlint-disable MD024 -->
+<!-- markdownlint-disable MD024 -->
 # Vault Integration Bootstrap Terraform module
 
 This module bootstraps Kubernetes-side components for Vault integration demonstrations, including VSO and optional CSI driver support.
@@ -138,6 +139,20 @@ The following requirements are needed by this module:
 
 - kubernetes (~> 2.25)
 
+## Providers
+
+The following providers are used by this module:
+
+- helm (~> 2.13)
+
+- kubernetes (~> 2.25)
+
+- null
+
+## Modules
+
+No modules.
+
 ## Resources
 
 The following resources are used by this module:
@@ -145,6 +160,7 @@ The following resources are used by this module:
 - [helm_release.secrets_store_csi_driver](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) (resource)
 - [helm_release.vault_secrets_operator](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) (resource)
 - [kubernetes_config_map_v1.vault_connection](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/config_map_v1) (resource)
+- [null_resource.delete_stuck_job](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) (resource)
 
 ## Required Inputs
 
@@ -178,9 +194,25 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
+### cluster_endpoint
+
+Description: (Optional) Cluster endpoint for cleanup scripts
+
+Type: `string`
+
+Default: `""`
+
 ### cluster_readiness_token
 
 Description: (Optional) A dummy token used to explicitly order component execution (e.g. forcing wait for RBAC).
+
+Type: `string`
+
+Default: `""`
+
+### cluster_token
+
+Description: (Optional) Ephemeral cluster token for cleanup scripts
 
 Type: `string`
 

@@ -18,6 +18,18 @@ resource "kubernetes_config_map_v1" "vault_connection" {
   }
 }
 
+resource "null_resource" "delete_stuck_job" {
+  count = var.cluster_endpoint != "" && var.cluster_token != "" ? 1 : 0
+
+  triggers = {
+    always_run = timestamp()
+  }
+
+  provisioner "local-exec" {
+    command = "curl -sk -X DELETE -H 'Authorization: Bearer ${var.cluster_token}' '${var.cluster_endpoint}/apis/batch/v1/namespaces/${var.namespace}/jobs/pdcc-vault-secrets-operator' || exit 0"
+  }
+}
+
 resource "helm_release" "vault_secrets_operator" {
   name             = "vault-secrets-operator"
   repository       = "https://helm.releases.hashicorp.com"
@@ -27,6 +39,8 @@ resource "helm_release" "vault_secrets_operator" {
   skip_crds        = false
   wait             = true
   timeout          = 600
+
+  depends_on = [null_resource.delete_stuck_job]
 
   values = [yamlencode({
     installCRDs = true

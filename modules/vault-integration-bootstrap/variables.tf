@@ -1,3 +1,16 @@
+variable "cluster_endpoint" {
+  description = "(Optional) Cluster endpoint for cleanup scripts"
+  type        = string
+  default     = ""
+}
+
+variable "cluster_token" {
+  description = "(Optional) Ephemeral cluster token for cleanup scripts"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
 variable "cluster_name" {
   description = "(Required) Cluster name used for tagging and release naming."
   type        = string
