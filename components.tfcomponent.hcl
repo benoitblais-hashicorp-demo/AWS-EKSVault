@@ -261,6 +261,7 @@ component "vault-integration-vso" {
   providers = {
     kubernetes = provider.kubernetes.vso_oidc_configurations
     helm       = provider.helm.vso_oidc_configurations
+    null       = provider.null.this
   }
 
 }
@@ -284,6 +285,7 @@ component "vault-integration-vso-csi" {
   providers = {
     kubernetes = provider.kubernetes.vso_csi_oidc_configurations
     helm       = provider.helm.vso_csi_oidc_configurations
+    null       = provider.null.this
   }
 
 }

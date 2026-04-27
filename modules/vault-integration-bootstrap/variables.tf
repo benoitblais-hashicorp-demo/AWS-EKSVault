@@ -8,6 +8,7 @@ variable "cluster_token" {
   description = "(Optional) Ephemeral cluster token for cleanup scripts"
   type        = string
   default     = ""
+  ephemeral   = true
   sensitive   = true
 }
 

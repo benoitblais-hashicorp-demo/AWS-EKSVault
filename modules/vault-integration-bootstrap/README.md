@@ -1,5 +1,6 @@
 <!-- markdownlint-disable MD024 -->
 <!-- markdownlint-disable MD024 -->
+<!-- markdownlint-disable MD024 -->
 # Vault Integration Bootstrap Terraform module
 
 This module bootstraps Kubernetes-side components for Vault integration demonstrations, including VSO and optional CSI driver support.
@@ -139,6 +140,8 @@ The following requirements are needed by this module:
 
 - kubernetes (~> 2.25)
 
+- null (~> 3.2)
+
 ## Providers
 
 The following providers are used by this module:
@@ -147,7 +150,7 @@ The following providers are used by this module:
 
 - kubernetes (~> 2.25)
 
-- null
+- null (~> 3.2)
 
 ## Modules
 
