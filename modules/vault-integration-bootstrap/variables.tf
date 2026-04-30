@@ -21,11 +21,6 @@ variable "integration_mode" {
 variable "namespace" {
   description = "(Required) Namespace where the integration components are installed."
   type        = string
-
-  validation {
-    condition     = can(regex("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$", var.namespace))
-    error_message = "The `namespace` variable must be a valid Kubernetes namespace name."
-  }
 }
 
 variable "vault_address" {

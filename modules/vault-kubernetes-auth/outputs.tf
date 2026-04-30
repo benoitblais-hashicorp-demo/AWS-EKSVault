@@ -5,7 +5,7 @@ output "auth_path" {
 
 output "csi_role_name" {
   description = "CSI Vault role name when enabled."
-  value       = var.enable_csi_role ? vault_kubernetes_auth_backend_role.csi[0].role_name : null
+  value       = try(vault_kubernetes_auth_backend_role.csi[0].role_name, null)
 }
 
 output "kv_mount_path" {
